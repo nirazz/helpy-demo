@@ -3,20 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Helpy - App Demo</title>
+<title>Helpy — Neighbors Helping Neighbors</title>
+<meta name="description" content="Helpy connects neighbors who need help with neighbors who want to help. Free, community-driven, bilingual Hebrew/English app for iOS and Android.">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  :root {
+    --indigo: #6366f1;
+    --purple: #8b5cf6;
+    --pink: #ec4899;
+    --slate: #94a3b8;
+    --bg: #0a0a1a;
+  }
+
   body {
     font-family: 'Inter', -apple-system, sans-serif;
-    background: #0a0a1a;
+    background: var(--bg);
     color: #fff;
     overflow-x: hidden;
   }
 
-  /* ── Intro / Hero ── */
+  /* ── Progress Bar ── */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--indigo), var(--purple), var(--pink));
+    z-index: 1000;
+    width: 0%;
+    transition: width 0.2s;
+  }
+
+  /* ── Hero ── */
   .hero {
     min-height: 100vh;
     display: flex;
@@ -24,78 +44,213 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: radial-gradient(ellipse at 50% 0%, #2d1b69 0%, #0a0a1a 70%);
+    background: radial-gradient(ellipse at 50% 0%, #2d1b69 0%, var(--bg) 70%);
     position: relative;
     overflow: hidden;
+    padding: 0 24px;
   }
 
   .hero::before {
     content: '';
     position: absolute;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%);
-    top: -200px; left: 50%; transform: translateX(-50%);
-    animation: pulse 4s ease-in-out infinite;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%);
+    top: -250px; left: 50%; transform: translateX(-50%);
+    animation: heroPulse 5s ease-in-out infinite;
   }
 
-  @keyframes pulse {
+  @keyframes heroPulse {
     0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.5; }
-    50% { transform: translateX(-50%) scale(1.2); opacity: 1; }
+    50% { transform: translateX(-50%) scale(1.3); opacity: 1; }
   }
 
   .hero-icon {
     width: 120px; height: 120px; border-radius: 28px;
-    margin-bottom: 24px;
-    box-shadow: 0 20px 60px rgba(99,102,241,0.4);
-    animation: floatIn 1s ease-out;
+    margin-bottom: 28px;
+    box-shadow: 0 24px 60px rgba(99,102,241,0.45);
+    animation: floatIn 0.9s ease-out;
     position: relative; z-index: 1;
   }
 
   .hero h1 {
-    font-size: 64px; font-weight: 900;
+    font-size: 72px; font-weight: 900;
     background: linear-gradient(135deg, #818cf8, #c084fc, #f472b6);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     margin-bottom: 16px;
-    animation: floatIn 1s ease-out 0.2s both;
+    animation: floatIn 0.9s ease-out 0.15s both;
     position: relative; z-index: 1;
+    line-height: 1;
   }
 
   .hero .tagline {
-    font-size: 24px; color: #a5b4fc; font-weight: 300;
-    margin-bottom: 48px;
-    animation: floatIn 1s ease-out 0.4s both;
+    font-size: 22px; color: #a5b4fc; font-weight: 400;
+    margin-bottom: 12px;
+    animation: floatIn 0.9s ease-out 0.3s both;
     position: relative; z-index: 1;
   }
+
+  .hero .sub-tagline {
+    font-size: 16px; color: #64748b; font-weight: 400;
+    margin-bottom: 48px;
+    animation: floatIn 0.9s ease-out 0.4s both;
+    position: relative; z-index: 1;
+  }
+
+  .hero-pills {
+    display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+    animation: floatIn 0.9s ease-out 0.5s both;
+    position: relative; z-index: 1;
+    margin-bottom: 48px;
+  }
+
+  .hero-pill {
+    background: rgba(99,102,241,0.15);
+    border: 1px solid rgba(99,102,241,0.3);
+    color: #a5b4fc;
+    font-size: 13px; font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 20px;
+  }
+
+  .hero-cta {
+    display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+    animation: floatIn 0.9s ease-out 0.6s both;
+    position: relative; z-index: 1;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--indigo), var(--purple));
+    color: #fff;
+    font-weight: 700; font-size: 16px;
+    padding: 14px 32px;
+    border-radius: 14px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 8px 32px rgba(99,102,241,0.4);
+  }
+
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(99,102,241,0.5); }
+
+  .btn-secondary {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: #94a3b8;
+    font-weight: 600; font-size: 16px;
+    padding: 14px 32px;
+    border-radius: 14px;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-secondary:hover { border-color: var(--indigo); color: #c4b5fd; }
 
   .scroll-hint {
     position: absolute; bottom: 40px;
     animation: bounce 2s ease-in-out infinite;
-    color: #6366f1; font-size: 14px; letter-spacing: 2px; text-transform: uppercase;
+    color: #475569; font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    z-index: 1;
   }
 
-  .scroll-hint span { display: block; margin-top: 8px; font-size: 24px; }
+  .scroll-hint span { display: block; margin-top: 8px; font-size: 20px; }
 
   @keyframes bounce {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(12px); }
+    50% { transform: translateY(10px); }
   }
 
   @keyframes floatIn {
-    from { opacity: 0; transform: translateY(30px); }
+    from { opacity: 0; transform: translateY(28px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* ── Sections ── */
+  /* ── Flow Section ── */
+  .flow-section {
+    padding: 120px 40px;
+    text-align: center;
+    background: radial-gradient(ellipse at 50% 50%, #1a1040 0%, var(--bg) 70%);
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: 12px; font-weight: 700; letter-spacing: 3px;
+    text-transform: uppercase; color: #6366f1;
+    margin-bottom: 16px;
+  }
+
+  .flow-section h2, .tech-section h2 {
+    font-size: 48px; font-weight: 800;
+    margin-bottom: 16px; line-height: 1.1;
+  }
+
+  .flow-section .section-sub {
+    font-size: 18px; color: #64748b;
+    margin-bottom: 64px; max-width: 500px; margin-left: auto; margin-right: auto;
+  }
+
+  .flow-steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .flow-step {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 24px;
+    padding: 32px 20px;
+    width: 170px;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    cursor: default;
+  }
+
+  .flow-step:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 24px 48px rgba(99,102,241,0.2);
+    border-color: rgba(99,102,241,0.4);
+  }
+
+  .flow-number {
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, var(--indigo), var(--purple));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 800;
+    margin: 0 auto 14px;
+  }
+
+  .flow-emoji { font-size: 34px; margin-bottom: 12px; }
+
+  .flow-step h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+
+  .flow-step p { font-size: 12px; color: #64748b; line-height: 1.5; }
+
+  .flow-arrow {
+    color: #2d3748; font-size: 24px;
+    animation: arrowPulse 2s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes arrowPulse {
+    0%, 100% { opacity: 0.3; transform: translateX(0); }
+    50% { opacity: 0.8; transform: translateX(3px); }
+  }
+
+  /* ── Feature Sections ── */
   .section {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 80px 40px;
+    padding: 100px 40px;
     position: relative;
     opacity: 0;
-    transform: translateY(60px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transform: translateY(50px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
   }
 
   .section.visible {
@@ -111,22 +266,18 @@
     gap: 80px;
   }
 
-  .section:nth-child(even) .section-inner {
-    flex-direction: row-reverse;
-  }
+  .section:nth-child(even) .section-inner { flex-direction: row-reverse; }
 
-  .section-text {
-    flex: 1;
-  }
+  .section-text { flex: 1; }
 
   .step-badge {
     display: inline-block;
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    background: linear-gradient(135deg, var(--indigo), var(--purple));
     color: #fff;
-    font-size: 14px; font-weight: 700;
+    font-size: 12px; font-weight: 700;
     padding: 6px 16px;
     border-radius: 20px;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     letter-spacing: 1px;
     text-transform: uppercase;
   }
@@ -137,31 +288,34 @@
     margin-bottom: 20px;
   }
 
-  .section-text h2 .gradient {
+  .gradient {
     background: linear-gradient(135deg, #818cf8, #c084fc);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   }
 
   .section-text p {
-    font-size: 18px; color: #94a3b8;
-    line-height: 1.7;
+    font-size: 17px; color: #94a3b8;
+    line-height: 1.75;
     margin-bottom: 16px;
   }
 
-  .feature-list {
-    list-style: none; margin-top: 20px;
-  }
+  .feature-list { list-style: none; margin-top: 24px; }
 
   .feature-list li {
-    font-size: 16px; color: #c4b5fd;
-    padding: 8px 0;
-    display: flex; align-items: center; gap: 10px;
+    font-size: 15px; color: #c4b5fd;
+    padding: 9px 0;
+    display: flex; align-items: center; gap: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
   }
 
-  .feature-list li::before {
-    content: ''; display: inline-block;
-    width: 8px; height: 8px; border-radius: 50%;
-    background: #6366f1; flex-shrink: 0;
+  .feature-list li:last-child { border-bottom: none; }
+
+  .feature-list .icon {
+    width: 28px; height: 28px;
+    background: rgba(99,102,241,0.15);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; flex-shrink: 0;
   }
 
   /* ── Phone Mockup ── */
@@ -170,266 +324,255 @@
     position: relative;
   }
 
+  .phone-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -20px; left: -20px; right: -20px; bottom: -20px;
+    background: radial-gradient(ellipse, rgba(99,102,241,0.15) 0%, transparent 70%);
+    border-radius: 60px;
+    z-index: -1;
+    filter: blur(30px);
+  }
+
   .phone-frame {
-    width: 280px;
-    background: #1a1a2e;
-    border-radius: 40px;
-    padding: 12px;
-    box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 2px #333, inset 0 0 0 2px #222;
+    width: 270px;
+    background: #111125;
+    border-radius: 44px;
+    padding: 14px;
+    box-shadow:
+      0 50px 100px rgba(0,0,0,0.6),
+      0 0 0 1px rgba(255,255,255,0.08),
+      inset 0 0 0 1px rgba(255,255,255,0.04);
     position: relative;
   }
 
   .phone-notch {
-    width: 120px; height: 28px;
-    background: #1a1a2e;
-    border-radius: 0 0 16px 16px;
+    width: 100px; height: 24px;
+    background: #111125;
+    border-radius: 0 0 14px 14px;
     position: absolute;
-    top: 12px; left: 50%; transform: translateX(-50%);
+    top: 14px; left: 50%; transform: translateX(-50%);
     z-index: 10;
   }
 
   .phone-screen {
     width: 100%;
-    border-radius: 30px;
+    border-radius: 32px;
     display: block;
   }
 
-  .phone-frame::after {
-    content: '';
-    position: absolute;
-    top: -10px; left: -10px; right: -10px; bottom: -10px;
-    border-radius: 48px;
-    background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(139,92,246,0.1), transparent);
-    z-index: -1;
-    filter: blur(20px);
-  }
-
-  /* ── Flow Section ── */
-  .flow-section {
-    min-height: 100vh;
-    padding: 100px 40px;
-    text-align: center;
-    background: radial-gradient(ellipse at 50% 50%, #1a1040 0%, #0a0a1a 70%);
-  }
-
-  .flow-section h2 {
-    font-size: 48px; font-weight: 800;
-    margin-bottom: 60px;
-  }
-
-  .flow-steps {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    flex-wrap: wrap;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-
-  .flow-step {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
+  /* ── New Feature Banner ── */
+  .new-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(34, 197, 94, 0.15);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #4ade80;
+    font-size: 11px; font-weight: 700;
+    padding: 4px 12px;
     border-radius: 20px;
-    padding: 32px 24px;
-    width: 180px;
-    position: relative;
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-
-  .flow-step:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(99,102,241,0.2);
-    border-color: #6366f1;
-  }
-
-  .flow-number {
-    width: 48px; height: 48px;
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px; font-weight: 800;
-    margin: 0 auto 16px;
-  }
-
-  .flow-emoji {
-    font-size: 36px;
-    margin-bottom: 12px;
-  }
-
-  .flow-step h3 {
-    font-size: 16px; font-weight: 700;
-    margin-bottom: 8px;
-  }
-
-  .flow-step p {
-    font-size: 13px; color: #94a3b8;
-    line-height: 1.5;
-  }
-
-  .flow-arrow {
-    display: flex; align-items: center;
-    color: #6366f1; font-size: 28px;
-    animation: arrowPulse 1.5s ease-in-out infinite;
-  }
-
-  @keyframes arrowPulse {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 1; }
-  }
-
-  /* ── Tech Section ── */
-  .tech-section {
-    padding: 100px 40px;
-    text-align: center;
-  }
-
-  .tech-section h2 {
-    font-size: 48px; font-weight: 800;
-    margin-bottom: 60px;
-  }
-
-  .tech-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 24px;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-
-  .tech-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 16px;
-    padding: 32px 24px;
-    transition: transform 0.3s, border-color 0.3s;
-  }
-
-  .tech-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(99,102,241,0.4);
-  }
-
-  .tech-card .icon {
-    font-size: 40px;
-    margin-bottom: 16px;
-  }
-
-  .tech-card h3 {
-    font-size: 18px; font-weight: 700;
-    margin-bottom: 8px;
-    color: #c4b5fd;
-  }
-
-  .tech-card p {
-    font-size: 14px; color: #64748b;
-    line-height: 1.6;
+    margin-left: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    vertical-align: middle;
   }
 
   /* ── Stats Bar ── */
   .stats-bar {
     display: flex;
     justify-content: center;
-    gap: 60px;
-    padding: 60px 40px;
-    background: linear-gradient(180deg, transparent, rgba(99,102,241,0.05), transparent);
+    gap: 0;
+    padding: 80px 40px;
+    background: linear-gradient(180deg, transparent, rgba(99,102,241,0.06), transparent);
   }
 
   .stat {
     text-align: center;
+    padding: 0 40px;
+    border-right: 1px solid rgba(255,255,255,0.07);
   }
 
+  .stat:last-child { border-right: none; }
+
   .stat .number {
-    font-size: 48px; font-weight: 900;
+    font-size: 52px; font-weight: 900;
     background: linear-gradient(135deg, #818cf8, #c084fc);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    line-height: 1;
   }
 
   .stat .label {
-    font-size: 14px; color: #64748b;
-    margin-top: 8px; text-transform: uppercase; letter-spacing: 2px;
+    font-size: 12px; color: #475569;
+    margin-top: 10px; text-transform: uppercase; letter-spacing: 2px;
+  }
+
+  /* ── Tech Section ── */
+  .tech-section {
+    padding: 120px 40px;
+    text-align: center;
+    background: radial-gradient(ellipse at 50% 50%, #0f0a2e 0%, var(--bg) 70%);
+  }
+
+  .tech-section .section-sub {
+    font-size: 18px; color: #64748b;
+    margin-bottom: 64px; max-width: 500px; margin-left: auto; margin-right: auto;
+  }
+
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    max-width: 1040px;
+    margin: 0 auto;
+  }
+
+  .tech-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px;
+    padding: 28px 22px;
+    text-align: left;
+    transition: transform 0.3s, border-color 0.3s, background 0.3s;
+  }
+
+  .tech-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(99,102,241,0.35);
+    background: rgba(99,102,241,0.05);
+  }
+
+  .tech-card .icon { font-size: 36px; margin-bottom: 14px; }
+
+  .tech-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #c4b5fd; }
+
+  .tech-card p { font-size: 13px; color: #475569; line-height: 1.6; }
+
+  /* ── Safety Section ── */
+  .safety-section {
+    padding: 120px 40px;
+    text-align: center;
+  }
+
+  .safety-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 64px auto 0;
+    text-align: left;
+  }
+
+  .safety-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px;
+    padding: 28px 24px;
+    transition: border-color 0.3s;
+  }
+
+  .safety-card:hover { border-color: rgba(99,102,241,0.3); }
+
+  .safety-card .icon { font-size: 32px; margin-bottom: 14px; }
+  .safety-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #e2e8f0; }
+  .safety-card p { font-size: 13px; color: #64748b; line-height: 1.6; }
+
+  /* ── Language Badge ── */
+  .lang-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(99,102,241,0.12);
+    border: 1px solid rgba(99,102,241,0.25);
+    border-radius: 12px;
+    padding: 10px 16px;
+    margin-top: 20px;
+    font-size: 14px; color: #a5b4fc;
   }
 
   /* ── Footer ── */
   .footer {
     text-align: center;
-    padding: 80px 40px;
-    background: radial-gradient(ellipse at 50% 100%, #1a1040 0%, #0a0a1a 70%);
+    padding: 100px 40px 60px;
+    background: radial-gradient(ellipse at 50% 100%, #1a1040 0%, var(--bg) 70%);
   }
 
   .footer h2 {
-    font-size: 48px; font-weight: 800;
-    margin-bottom: 16px;
+    font-size: 56px; font-weight: 900;
+    margin-bottom: 16px; line-height: 1.1;
   }
 
-  .footer p {
-    font-size: 18px; color: #94a3b8;
-    margin-bottom: 32px;
+  .footer .footer-sub {
+    font-size: 18px; color: #64748b;
+    margin-bottom: 48px;
+    max-width: 400px;
+    margin-left: auto; margin-right: auto;
   }
 
   .badge-row {
     display: flex;
     justify-content: center;
     gap: 16px;
-    margin-bottom: 40px;
+    margin-bottom: 60px;
+    flex-wrap: wrap;
   }
 
   .store-badge {
-    display: inline-block;
-    background: #fff;
-    color: #000;
+    display: inline-flex; align-items: center; gap: 10px;
     font-weight: 700;
-    font-size: 16px;
-    padding: 14px 28px;
-    border-radius: 12px;
+    font-size: 15px;
+    padding: 16px 28px;
+    border-radius: 14px;
     text-decoration: none;
-    transition: transform 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
   }
 
-  .store-badge:hover { transform: scale(1.05); }
-  .store-badge.apple { background: #000; color: #fff; border: 1px solid #333; }
-  .store-badge.android { background: #1a1a2e; color: #a5b4fc; border: 1px solid #6366f1; }
-
-  .footer .copyright {
-    font-size: 13px; color: #475569;
-    margin-top: 40px;
+  .store-badge.apple {
+    background: #fff; color: #000;
+    box-shadow: 0 8px 32px rgba(255,255,255,0.1);
   }
 
-  /* ── Language Badge ── */
-  .lang-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(99,102,241,0.15);
-    border: 1px solid rgba(99,102,241,0.3);
-    border-radius: 12px;
-    padding: 10px 16px;
-    margin-top: 16px;
-    font-size: 14px; color: #a5b4fc;
+  .store-badge.apple:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(255,255,255,0.15); }
+
+  .store-badge.android {
+    background: rgba(255,255,255,0.05);
+    color: #a5b4fc;
+    border: 1px solid rgba(99,102,241,0.4);
   }
+
+  .store-badge.android:hover { transform: translateY(-3px); border-color: var(--indigo); }
+
+  .footer-links {
+    display: flex; justify-content: center; gap: 32px;
+    margin-bottom: 40px;
+  }
+
+  .footer-links a {
+    font-size: 14px; color: #475569; text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: #a5b4fc; }
+
+  .footer .copyright { font-size: 13px; color: #334155; }
 
   /* ── Responsive ── */
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     .section-inner, .section:nth-child(even) .section-inner {
       flex-direction: column;
       text-align: center;
+      gap: 48px;
     }
-    .hero h1 { font-size: 40px; }
+
+    .feature-list li { justify-content: center; }
+
+    .hero h1 { font-size: 48px; }
     .hero .tagline { font-size: 18px; }
-    .section-text h2 { font-size: 32px; }
+    .section-text h2 { font-size: 34px; }
+    .flow-section h2, .tech-section h2 { font-size: 36px; }
     .phone-frame { width: 220px; }
     .flow-steps { flex-direction: column; align-items: center; }
     .flow-arrow { transform: rotate(90deg); }
-    .stats-bar { flex-wrap: wrap; gap: 30px; }
-    .stat .number { font-size: 36px; }
-  }
-
-  /* ── Auto-play timeline ── */
-  .progress-bar {
-    position: fixed;
-    top: 0; left: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #6366f1, #c084fc, #f472b6);
-    z-index: 1000;
-    width: 0%;
-    transition: width 0.3s;
+    .stats-bar { flex-wrap: wrap; gap: 32px; }
+    .stat { border-right: none; padding: 0 24px; }
+    .stat .number { font-size: 40px; }
+    .footer h2 { font-size: 40px; }
   }
 </style>
 </head>
@@ -439,70 +582,83 @@
 
 <!-- ═══════ HERO ═══════ -->
 <div class="hero">
-  <img src="app-icon-512.png" class="hero-icon" alt="Helpy Icon" onerror="this.style.display='none'">
+  <img src="app-icon-512.png" class="hero-icon" alt="Helpy App Icon" onerror="this.style.display='none'">
   <h1>Helpy</h1>
   <p class="tagline">Neighbors Helping Neighbors</p>
+  <p class="sub-tagline">A community app for people who want to give and receive help — for free.</p>
+  <div class="hero-pills">
+    <span class="hero-pill">🆓 Always Free</span>
+    <span class="hero-pill">🇮🇱 Hebrew + English</span>
+    <span class="hero-pill">📍 Nearby Neighbors</span>
+    <span class="hero-pill">🛡 Safe & Verified</span>
+  </div>
+  <div class="hero-cta">
+    <a href="https://testflight.apple.com/join/P6uAfJsQ" class="btn-primary">&#63743; Try on iPhone</a>
+    <a href="https://expo.dev/accounts/nirs-organization/projects/helpy/builds/34aad864-3c9c-4fa3-8062-63a39fd49798" class="btn-secondary">&#9654; Android APK</a>
+  </div>
   <div class="scroll-hint">
-    Scroll to explore
+    Explore
     <span>&#8595;</span>
   </div>
 </div>
 
-<!-- ═══════ FLOW ═══════ -->
+<!-- ═══════ HOW IT WORKS ═══════ -->
 <div class="flow-section" id="flow">
+  <div class="section-label">The Flow</div>
   <h2>How <span style="background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Helpy</span> Works</h2>
+  <p class="section-sub">From request to help in minutes — no fees, no intermediaries, just neighbors.</p>
   <div class="flow-steps">
     <div class="flow-step">
       <div class="flow-number">1</div>
-      <div class="flow-emoji">&#128221;</div>
+      <div class="flow-emoji">📝</div>
       <h3>Post a Request</h3>
-      <p>Describe what you need help with</p>
+      <p>Describe what you need, add photos, pick urgency</p>
     </div>
-    <div class="flow-arrow">&#10132;</div>
+    <div class="flow-arrow">→</div>
     <div class="flow-step">
       <div class="flow-number">2</div>
-      <div class="flow-emoji">&#128064;</div>
-      <h3>Browse Nearby</h3>
-      <p>Helpers see requests within their radius</p>
+      <div class="flow-emoji">🃏</div>
+      <h3>Helpers Browse</h3>
+      <p>Nearby helpers swipe through cards or browse the map</p>
     </div>
-    <div class="flow-arrow">&#10132;</div>
+    <div class="flow-arrow">→</div>
     <div class="flow-step">
       <div class="flow-number">3</div>
-      <div class="flow-emoji">&#128154;</div>
-      <h3>Swipe to Help</h3>
-      <p>Swipe right to offer your assistance</p>
+      <div class="flow-emoji">✋</div>
+      <h3>Offer Help</h3>
+      <p>Tap "Offer Help" — requester reviews and accepts</p>
     </div>
-    <div class="flow-arrow">&#10132;</div>
+    <div class="flow-arrow">→</div>
     <div class="flow-step">
       <div class="flow-number">4</div>
-      <div class="flow-emoji">&#128172;</div>
-      <h3>Match & Chat</h3>
-      <p>Coordinate via real-time messaging</p>
+      <div class="flow-emoji">💬</div>
+      <h3>Match &amp; Chat</h3>
+      <p>Real-time messaging with typing indicators</p>
     </div>
-    <div class="flow-arrow">&#10132;</div>
+    <div class="flow-arrow">→</div>
     <div class="flow-step">
       <div class="flow-number">5</div>
-      <div class="flow-emoji">&#11088;</div>
-      <h3>Rate & Trust</h3>
-      <p>Build community reputation</p>
+      <div class="flow-emoji">⭐</div>
+      <h3>Rate &amp; Build Trust</h3>
+      <p>Star ratings build your community reputation</p>
     </div>
   </div>
 </div>
 
-<!-- ═══════ BROWSE ═══════ -->
+<!-- ═══════ BROWSE (Cards) ═══════ -->
 <div class="section" id="s1">
   <div class="section-inner">
     <div class="section-text">
       <span class="step-badge">Browse</span>
-      <h2>Swipe to <span class="gradient">Discover</span> Requests</h2>
-      <p>Browse help requests from your neighbors with swipe cards. Each card shows the request details, distance, urgency, and photos. Tap images to zoom in.</p>
+      <h2>Swipe Through <span class="gradient">Requests</span></h2>
+      <p>Browse help requests from neighbors with swipe cards. Cards show category, urgency, distance, requester profile, and up to 3 photos. Haptic feedback on every interaction.</p>
       <ul class="feature-list">
-        <li>Swipe right to offer help, left to skip</li>
-        <li>Pill-shaped action buttons: "Skip" and "Offer Help"</li>
-        <li>Distance calculated in real-time (Haversine)</li>
-        <li>Filter by radius: 1-10 km or miles</li>
-        <li>12 categories with animated press feedback</li>
-        <li>Tap photos to zoom (pinch up to 4x)</li>
+        <li><span class="icon">✋</span>Pill buttons: "→ Skip" (gray) and "✋ Offer Help" (purple gradient)</li>
+        <li><span class="icon">📍</span>PostGIS DB-level radius filter — precise distance queries at scale</li>
+        <li><span class="icon">🔄</span>Loads 25 at a time, auto-fetches more as you go</li>
+        <li><span class="icon">🎨</span>Red/green tint overlay follows your swipe direction</li>
+        <li><span class="icon">🔍</span>Tap photos to zoom (pinch up to 4×)</li>
+        <li><span class="icon">🔕</span>Hides blocked and reported users automatically</li>
       </ul>
     </div>
     <div class="phone-wrapper">
@@ -514,19 +670,43 @@
   </div>
 </div>
 
+<!-- ═══════ MAP VIEW ═══════ -->
+<div class="section" id="s-map">
+  <div class="section-inner">
+    <div class="section-text">
+      <span class="step-badge">Map View <span class="new-badge">New</span></span>
+      <h2>Browse on the <span class="gradient">Map</span></h2>
+      <p>Toggle between card view and map view. See all nearby requests plotted with category emoji pins. Tap any pin to jump to that request — the card updates instantly at the bottom.</p>
+      <ul class="feature-list">
+        <li><span class="icon">📌</span>Custom emoji pins colored by category</li>
+        <li><span class="icon">💡</span>Selected pin: highlighted with white border + shadow</li>
+        <li><span class="icon">📋</span>Request card shown below map — swipe, skip, or offer help</li>
+        <li><span class="icon">🔁</span>Cards ↔ Map toggle — synced to same index</li>
+        <li><span class="icon">📐</span>Camera centers on pin above the bottom card</li>
+      </ul>
+    </div>
+    <div class="phone-wrapper">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <img src="01-browse.png" class="phone-screen" alt="Map View">
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ═══════ POST ═══════ -->
 <div class="section" id="s2">
   <div class="section-inner">
     <div class="section-text">
       <span class="step-badge">Post</span>
       <h2>Ask for <span class="gradient">Help</span> in Seconds</h2>
-      <p>Create a help request with a title, description, category, and urgency level. Add up to 3 photos to show what you need help with.</p>
+      <p>Create a request with a title, description, category, urgency level, and up to 3 photos. Phone verification is required before your first post — keeping the community trustworthy.</p>
       <ul class="feature-list">
-        <li>Quick form with 12-category grid picker</li>
-        <li>Photo upload from camera or gallery (up to 3)</li>
-        <li>Content filter for safe community</li>
-        <li>Phone verification required before posting</li>
-        <li>Auto-redirect to My Requests after posting</li>
+        <li><span class="icon">📁</span>12-category grid with icon picker</li>
+        <li><span class="icon">📷</span>Photo upload from camera or gallery (up to 3)</li>
+        <li><span class="icon">🧹</span>Built-in content filter — EN + HE profanity blocked</li>
+        <li><span class="icon">📱</span>Phone verification required before posting</li>
+        <li><span class="icon">➡</span>Auto-redirects to My Requests after posting</li>
       </ul>
     </div>
     <div class="phone-wrapper">
@@ -544,12 +724,15 @@
     <div class="section-text">
       <span class="step-badge">Chat</span>
       <h2><span class="gradient">Real-Time</span> Messaging</h2>
-      <p>Once matched, coordinate with your neighbor through instant messaging. Chat is powered by Supabase Realtime WebSocket subscriptions.</p>
+      <p>Once matched, coordinate instantly with your neighbor. Messages deliver in milliseconds via Supabase Realtime WebSocket subscriptions — with no polling, no delays.</p>
       <ul class="feature-list">
-        <li>Instant message delivery</li>
-        <li>"I'm Helping" and "Helping Me" tabs</li>
-        <li>Complete session and rate from chat</li>
-        <li>Report or block users for safety</li>
+        <li><span class="icon">✍</span>Typing indicators — animated dots when partner is typing <span class="new-badge">New</span></li>
+        <li><span class="icon">✓</span>Read receipts — "Seen ✓" when your message was read <span class="new-badge">New</span></li>
+        <li><span class="icon">📨</span>Instant delivery via Realtime broadcast channel</li>
+        <li><span class="icon">🔴</span>Unread badge on tab — clears when you open Chat</li>
+        <li><span class="icon">📜</span>Pagination — load earlier messages on demand</li>
+        <li><span class="icon">✅</span>Mark Complete and rate your helper from chat</li>
+        <li><span class="icon">🚫</span>Report or block users directly from chat header</li>
       </ul>
     </div>
     <div class="phone-wrapper">
@@ -566,14 +749,15 @@
   <div class="section-inner">
     <div class="section-text">
       <span class="step-badge">Manage</span>
-      <h2>Track Your <span class="gradient">Requests</span></h2>
-      <p>View all your active and past requests. Accept or decline offers from helpers, close completed requests, and rate your experience.</p>
+      <h2>Your <span class="gradient">Requests</span>, Organized</h2>
+      <p>Review all active and past requests in one place. Accept or decline helpers with a tap, close completed requests, and rate your experience — all with haptic feedback.</p>
       <ul class="feature-list">
-        <li>Active and History tabs</li>
-        <li>Accept or decline helper offers</li>
-        <li>View request photos with zoom</li>
-        <li>Auto-refreshes when you switch tabs</li>
-        <li>Rating prompt on completion</li>
+        <li><span class="icon">📂</span>Active and History tabs</li>
+        <li><span class="icon">✔</span>Accept or decline helper offers</li>
+        <li><span class="icon">🎉</span>Celebration animation on accept + "Chat Now" CTA <span class="new-badge">New</span></li>
+        <li><span class="icon">🖼</span>View request photos with pinch-to-zoom</li>
+        <li><span class="icon">🔄</span>Auto-refreshes when tab is focused</li>
+        <li><span class="icon">⭐</span>Star rating prompt on request completion</li>
       </ul>
     </div>
     <div class="phone-wrapper">
@@ -590,22 +774,47 @@
   <div class="section-inner">
     <div class="section-text">
       <span class="step-badge">Profile</span>
-      <h2>Your <span class="gradient">Community</span> Profile</h2>
-      <p>View your community impact, adjust settings, toggle availability, and switch between English and Hebrew with full RTL support.</p>
+      <h2>Your <span class="gradient">Community</span> Identity</h2>
+      <p>Your public profile shows your stats, star rating, and reviews. Tap any user's name or avatar anywhere in the app to see their full review wall and community track record.</p>
       <ul class="feature-list">
-        <li>Community Impact: Helped, Got Help, Rating, Posted</li>
-        <li>Verification badge for Google/Apple sign-in</li>
-        <li>Search radius and availability toggle</li>
-        <li>Account deletion and support contact</li>
+        <li><span class="icon">📊</span>Community Impact: Helped, Got Help, Rating, Posted</li>
+        <li><span class="icon">👤</span>Public profiles with review wall and share button</li>
+        <li><span class="icon">✅</span>Verification badge for Google/Apple sign-in</li>
+        <li><span class="icon">📡</span>Search radius (1–10 km) and availability toggle</li>
+        <li><span class="icon">🗑</span>Account deletion with full data wipe</li>
       </ul>
       <div class="lang-badge">
-        &#127470;&#127473; Full Hebrew &amp; English &bull; RTL Support
+        🇮🇱 Full Hebrew &amp; English · RTL Support
       </div>
     </div>
     <div class="phone-wrapper">
       <div class="phone-frame">
         <div class="phone-notch"></div>
         <img src="05-profile.png" class="phone-screen" alt="Profile Screen">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ HEBREW ═══════ -->
+<div class="section" id="s6">
+  <div class="section-inner">
+    <div class="section-text">
+      <span class="step-badge">🇮🇱 Hebrew</span>
+      <h2>Full <span class="gradient">RTL</span> Support</h2>
+      <p>Every screen, label, and button is translated. The entire layout flips to right-to-left for Hebrew speakers. One tap in Profile to switch — the app remembers your preference.</p>
+      <ul class="feature-list">
+        <li><span class="icon">🔄</span>One-tap language toggle on Profile screen</li>
+        <li><span class="icon">📐</span>Full RTL layout — arrows, inputs, modals all flip</li>
+        <li><span class="icon">📏</span>Hebrew uses km (ק״מ) instead of miles</li>
+        <li><span class="icon">🌐</span>210+ bilingual translation keys</li>
+        <li><span class="icon">☁</span>Language preference synced to your profile</li>
+      </ul>
+    </div>
+    <div class="phone-wrapper">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <img src="06-hebrew.png" class="phone-screen" alt="Hebrew RTL Layout">
       </div>
     </div>
   </div>
@@ -622,8 +831,12 @@
     <div class="label">Help Categories</div>
   </div>
   <div class="stat">
-    <div class="number">7</div>
+    <div class="number">9</div>
     <div class="label">DB Tables</div>
+  </div>
+  <div class="stat">
+    <div class="number">5</div>
+    <div class="label">Edge Functions</div>
   </div>
   <div class="stat">
     <div class="number">2</div>
@@ -631,134 +844,170 @@
   </div>
 </div>
 
-<!-- ═══════ TECH ═══════ -->
-<div class="tech-section" id="tech">
-  <h2>Built <span style="background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">With</span></h2>
-  <div class="tech-grid">
-    <div class="tech-card">
-      <div class="icon">&#9883;</div>
-      <h3>React Native</h3>
-      <p>Expo SDK 54 with TypeScript for cross-platform iOS & Android development</p>
+<!-- ═══════ SAFETY ═══════ -->
+<div class="safety-section" id="safety">
+  <div class="section-label">Trust &amp; Safety</div>
+  <h2 style="font-size:44px;font-weight:800;margin-bottom:12px;">Built Safe <span class="gradient">From Day One</span></h2>
+  <p style="font-size:17px;color:#64748b;max-width:520px;margin:0 auto;">Safety isn't a feature we added — it's baked into every layer of the app.</p>
+  <div class="safety-grid">
+    <div class="safety-card">
+      <div class="icon">📱</div>
+      <h3>Phone Verification</h3>
+      <p>Required before helping or posting. Verified via Twilio SMS OTP — rate-limited to 3 attempts per 10 minutes.</p>
     </div>
-    <div class="tech-card">
-      <div class="icon">&#9889;</div>
-      <h3>Supabase</h3>
-      <p>PostgreSQL database, Auth, Realtime subscriptions, Storage, Edge Functions</p>
+    <div class="safety-card">
+      <div class="icon">🚩</div>
+      <h3>Report &amp; Block</h3>
+      <p>Report any user with 5 reason options. Auto-block on report. Bidirectional blocking — blocked users disappear from both sides.</p>
     </div>
-    <div class="tech-card">
-      <div class="icon">&#128272;</div>
-      <h3>Authentication</h3>
-      <p>Google OAuth, Apple Sign-In, Email/Password with auto-profile creation</p>
+    <div class="safety-card">
+      <div class="icon">🔐</div>
+      <h3>Row-Level Security</h3>
+      <p>All 9 database tables have RLS policies. You can only see and modify data you're authorized to access.</p>
     </div>
-    <div class="tech-card">
-      <div class="icon">&#128241;</div>
-      <h3>Twilio Verify</h3>
-      <p>SMS phone verification via Supabase Edge Function before helping or posting</p>
+    <div class="safety-card">
+      <div class="icon">🧹</div>
+      <h3>Content Filter</h3>
+      <p>EN + HE profanity blocklist applied to all posts and messages before they reach the database.</p>
     </div>
-    <div class="tech-card">
-      <div class="icon">&#128276;</div>
-      <h3>Push Notifications</h3>
-      <p>Expo Push API with bilingual alerts for offers, messages, and ratings</p>
+    <div class="safety-card">
+      <div class="icon">📜</div>
+      <h3>Terms Acceptance</h3>
+      <p>Every user must accept community guidelines on first sign-in — covering zero tolerance for harassment and fraud.</p>
     </div>
-    <div class="tech-card">
-      <div class="icon">&#127757;</div>
-      <h3>i18n + RTL</h3>
-      <p>210+ translation keys, Hebrew/English toggle, full right-to-left layout</p>
-    </div>
-    <div class="tech-card">
-      <div class="icon">&#128737;</div>
-      <h3>Safety & UGC</h3>
-      <p>Content filter, report/block users, terms acceptance, RLS on all tables</p>
-    </div>
-    <div class="tech-card">
-      <div class="icon">&#128506;</div>
-      <h3>Geolocation</h3>
-      <p>expo-location with Haversine distance, auto-updates on sign-in</p>
+    <div class="safety-card">
+      <div class="icon">🗑</div>
+      <h3>Account Deletion</h3>
+      <p>Full data wipe on request — profiles, messages, matches, ratings, all deleted via server-side RPC with one tap.</p>
     </div>
   </div>
 </div>
 
-<!-- ═══════ HEBREW ═══════ -->
-<div class="section" id="s6">
-  <div class="section-inner">
-    <div class="section-text">
-      <span class="step-badge">&#127470;&#127473; Hebrew</span>
-      <h2>Full <span class="gradient">RTL</span> Support</h2>
-      <p>Every screen, button, and label is translated. The entire layout flips to right-to-left for Hebrew speakers. Distances switch from miles to kilometers.</p>
-      <ul class="feature-list">
-        <li>One-tap language toggle on Profile</li>
-        <li>All 5 tabs + headers translated</li>
-        <li>Navigation arrows flip for RTL</li>
-        <li>Hebrew uses km instead of miles</li>
-      </ul>
+<!-- ═══════ TECH ═══════ -->
+<div class="tech-section" id="tech">
+  <div class="section-label">Under the Hood</div>
+  <h2>Built <span style="background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">With Care</span></h2>
+  <p class="section-sub">Modern stack chosen for reliability, real-time speed, and zero ongoing infrastructure cost.</p>
+  <div class="tech-grid">
+    <div class="tech-card">
+      <div class="icon">⚛</div>
+      <h3>React Native + Expo</h3>
+      <p>SDK 54, TypeScript, EAS Build. Ships to iOS and Android from one codebase.</p>
     </div>
-    <div class="phone-wrapper">
-      <div class="phone-frame">
-        <div class="phone-notch"></div>
-        <img src="06-hebrew.png" class="phone-screen" alt="Hebrew RTL">
-      </div>
+    <div class="tech-card">
+      <div class="icon">⚡</div>
+      <h3>Supabase</h3>
+      <p>PostgreSQL with RLS on all tables, Realtime WebSockets, Storage, and 5 Edge Functions (Deno).</p>
+    </div>
+    <div class="tech-card">
+      <div class="icon">🔑</div>
+      <h3>Authentication</h3>
+      <p>Google OAuth (primary), Apple Sign-In, email hidden fallback. Auto-profile creation on social sign-in.</p>
+    </div>
+    <div class="tech-card">
+      <div class="icon">📲</div>
+      <h3>Twilio Verify</h3>
+      <p>SMS OTP phone verification via Edge Function. Rate-limited. Bypasses flaky Supabase phone auth.</p>
+    </div>
+    <div class="tech-card">
+      <div class="icon">🔔</div>
+      <h3>Push Notifications</h3>
+      <p>Expo Push API with bilingual (HE/EN) alerts for new offers, messages, accepted matches, and ratings.</p>
+    </div>
+    <div class="tech-card">
+      <div class="icon">🗺</div>
+      <h3>Maps + Geolocation</h3>
+      <p>react-native-maps with custom emoji pins. Haversine distance. expo-location auto-updates on sign-in.</p>
+    </div>
+    <div class="tech-card">
+      <div class="icon">♿</div>
+      <h3>Accessibility</h3>
+      <p>VoiceOver labels, Reduce Motion support, native chevron back button, swipe-to-dismiss modals.</p>
+    </div>
+    <div class="tech-card">
+      <div class="icon">🌐</div>
+      <h3>i18n + RTL</h3>
+      <p>210+ keys, Hebrew/English toggle, full right-to-left layout flip, km vs miles auto-switch.</p>
+    </div>
+    <div class="tech-card">
+      <div class="icon">🌙</div>
+      <h3>Dark Mode</h3>
+      <p>Full system dark mode — every screen, modal, and component uses a themed color system with smooth transitions.</p>
+    </div>
+    <div class="tech-card">
+      <div class="icon">✨</div>
+      <h3>Animations</h3>
+      <p>Haptic feedback, spring animations, skeleton loaders, swipe tint overlay, celebration confetti — with Reduce Motion support.</p>
+    </div>
+    <div class="tech-card">
+      <div class="icon">📈</div>
+      <h3>PostHog Analytics</h3>
+      <p>EU-hosted. Tracks the full funnel: sign_up → request_posted → swipe_right → match_created → help_completed.</p>
+    </div>
+    <div class="tech-card">
+      <div class="icon">🐛</div>
+      <h3>Sentry Crash Reporting</h3>
+      <p>EU data center. Catches unhandled exceptions, reports JS errors with full stack traces, and error boundary UI fallback.</p>
     </div>
   </div>
 </div>
 
 <!-- ═══════ FOOTER ═══════ -->
 <div class="footer">
-  <h2>Try <span style="background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Helpy</span> Today</h2>
-  <p>Join your community and start helping your neighbors.</p>
+  <h2>Start <span style="background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Helping</span> Today</h2>
+  <p class="footer-sub">Free for everyone. Always. No fees, no subscriptions, no middlemen.</p>
   <div class="badge-row">
-    <a href="https://testflight.apple.com/join/P6uAfJsQ" class="store-badge apple">&#63743; TestFlight (iOS)</a>
-    <a href="https://expo.dev/accounts/nirs-organization/projects/helpy/builds/34aad864-3c9c-4fa3-8062-63a39fd49798" class="store-badge android">&#9654; Download APK (Android)</a>
+    <a href="https://testflight.apple.com/join/P6uAfJsQ" class="store-badge apple">
+      &#63743; &nbsp;TestFlight (iOS Beta)
+    </a>
+    <a href="https://expo.dev/accounts/nirs-organization/projects/helpy/builds/34aad864-3c9c-4fa3-8062-63a39fd49798" class="store-badge android">
+      &#9654; &nbsp;Android APK
+    </a>
   </div>
-  <p class="copyright">&copy; 2026 Helpy. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="https://help-y.com/">Privacy Policy</a>
+    <a href="https://help-y.com/terms.html">Terms of Service</a>
+    <a href="mailto:support@help-y.com">Contact</a>
+  </div>
+  <p class="copyright">© 2026 Helpy. Made with care for communities everywhere.</p>
 </div>
 
 <script>
-  // ── Scroll progress bar ──
+  // Progress bar
   window.addEventListener('scroll', () => {
     const scrollTop = window.scrollY;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = (scrollTop / docHeight) * 100;
-    document.getElementById('progressBar').style.width = progress + '%';
+    document.getElementById('progressBar').style.width = (scrollTop / docHeight * 100) + '%';
   });
 
-  // ── Reveal sections on scroll ──
+  // Reveal sections on scroll
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
+      if (entry.isIntersecting) entry.target.classList.add('visible');
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0.12 });
 
   document.querySelectorAll('.section').forEach(el => observer.observe(el));
 
-  // ── Auto-scroll "video" mode ──
-  let autoPlaying = false;
+  // Space bar auto-play tour
+  const tourSections = ['flow', 's1', 's-map', 's2', 's3', 's4', 's5', 's6', 'safety', 'tech'];
+  let touring = false;
 
-  function autoPlay() {
-    if (autoPlaying) return;
-    autoPlaying = true;
-    const sections = ['flow', 's1', 's2', 's3', 's4', 's5', 's6', 'tech'];
+  function startTour() {
+    if (touring) return;
+    touring = true;
     let i = 0;
-
-    function scrollNext() {
-      if (i >= sections.length) { autoPlaying = false; return; }
-      const el = document.getElementById(sections[i]);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-      i++;
-      setTimeout(scrollNext, 3000);
+    function next() {
+      if (i >= tourSections.length) { touring = false; return; }
+      const el = document.getElementById(tourSections[i++]);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(next, 3200);
     }
-    scrollNext();
+    next();
   }
 
-  // Press Space to auto-play
   document.addEventListener('keydown', (e) => {
-    if (e.code === 'Space' && !autoPlaying) {
-      e.preventDefault();
-      autoPlay();
-    }
+    if (e.code === 'Space' && !touring) { e.preventDefault(); startTour(); }
   });
 </script>
 
