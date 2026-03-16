@@ -111,7 +111,9 @@
     font-size: 13px; font-weight: 600;
     padding: 8px 16px;
     border-radius: 20px;
+    display: inline-flex; align-items: center; gap: 6px;
   }
+  .hero-pill svg { width: 13px; height: 13px; stroke: #a5b4fc; stroke-width: 2; flex-shrink: 0; }
 
   .hero-cta {
     display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
@@ -592,10 +594,10 @@
   <p class="tagline">Neighbors Helping Neighbors</p>
   <p class="sub-tagline">A community app for people who want to give and receive help - for free.</p>
   <div class="hero-pills">
-    <span class="hero-pill">🆓 Always Free</span>
-    <span class="hero-pill">🇮🇱 Hebrew + English</span>
-    <span class="hero-pill">📍 Nearby Neighbors</span>
-    <span class="hero-pill">🛡 Safe & Verified</span>
+    <span class="hero-pill"><i data-lucide="gift"></i> Always Free</span>
+    <span class="hero-pill"><i data-lucide="globe"></i> Hebrew + English</span>
+    <span class="hero-pill"><i data-lucide="map-pin"></i> Nearby Neighbors</span>
+    <span class="hero-pill"><i data-lucide="shield"></i> Safe & Verified</span>
   </div>
   <div class="hero-cta">
     <a href="https://testflight.apple.com/join/P6uAfJsQ" class="btn-primary">&#63743; Try on iPhone</a>
