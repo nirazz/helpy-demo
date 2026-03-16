@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Helpy - Neighbors Helping Neighbors</title>
 <meta name="description" content="Helpy connects neighbors who need help with neighbors who want to help. Free, community-driven, bilingual Hebrew/English app for iOS and Android.">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -472,6 +473,10 @@
   .safety-card:hover { border-color: rgba(99,102,241,0.3); }
 
   .safety-card .icon { font-size: 32px; margin-bottom: 14px; }
+  .feature-list .icon svg { width: 14px; height: 14px; stroke: #a5b4fc; stroke-width: 2; }
+  .safety-card .icon svg { width: 28px; height: 28px; stroke: #a5b4fc; stroke-width: 1.8; }
+  .tech-card .icon svg { width: 32px; height: 32px; stroke: #818cf8; stroke-width: 1.8; }
+  .flow-emoji svg { width: 34px; height: 34px; stroke: #818cf8; stroke-width: 1.5; }
   .safety-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #e2e8f0; }
   .safety-card p { font-size: 13px; color: #64748b; line-height: 1.6; }
 
@@ -610,35 +615,35 @@
   <div class="flow-steps">
     <div class="flow-step">
       <div class="flow-number">1</div>
-      <div class="flow-emoji">📝</div>
+      <div class="flow-emoji"><i data-lucide="pen-line"></i></div>
       <h3>Post a Request</h3>
       <p>Describe what you need, add photos, pick urgency</p>
     </div>
     <div class="flow-arrow">→</div>
     <div class="flow-step">
       <div class="flow-number">2</div>
-      <div class="flow-emoji">🃏</div>
+      <div class="flow-emoji"><i data-lucide="layers"></i></div>
       <h3>Helpers Browse</h3>
       <p>Nearby helpers swipe through cards or browse the map</p>
     </div>
     <div class="flow-arrow">→</div>
     <div class="flow-step">
       <div class="flow-number">3</div>
-      <div class="flow-emoji">✋</div>
+      <div class="flow-emoji"><i data-lucide="hand-helping"></i></div>
       <h3>Offer Help</h3>
       <p>Tap "Offer Help" - requester reviews and accepts</p>
     </div>
     <div class="flow-arrow">→</div>
     <div class="flow-step">
       <div class="flow-number">4</div>
-      <div class="flow-emoji">💬</div>
+      <div class="flow-emoji"><i data-lucide="message-circle"></i></div>
       <h3>Match &amp; Chat</h3>
       <p>Real-time messaging with typing indicators</p>
     </div>
     <div class="flow-arrow">→</div>
     <div class="flow-step">
       <div class="flow-number">5</div>
-      <div class="flow-emoji">⭐</div>
+      <div class="flow-emoji"><i data-lucide="star"></i></div>
       <h3>Rate &amp; Build Trust</h3>
       <p>Star ratings build your community reputation</p>
     </div>
@@ -653,12 +658,12 @@
       <h2>Swipe Through <span class="gradient">Requests</span></h2>
       <p>Browse help requests from neighbors with swipe cards. Cards show category, urgency, distance, requester profile, and up to 3 photos. Haptic feedback on every interaction.</p>
       <ul class="feature-list">
-        <li><span class="icon">✋</span>Pill buttons: "→ Skip" (gray) and "✋ Offer Help" (purple gradient)</li>
-        <li><span class="icon">📍</span>PostGIS DB-level radius filter - precise distance queries at scale</li>
-        <li><span class="icon">⚡</span>Loads 25 at a time, auto-fetches more as you go</li>
-        <li><span class="icon">🫱</span>Red/green tint overlay follows your swipe direction</li>
-        <li><span class="icon">📸</span>Tap photos to zoom (pinch up to 4×)</li>
-        <li><span class="icon">🚫</span>Hides blocked and reported users automatically</li>
+        <li><span class="icon"><i data-lucide="hand-helping"></i></span>Pill buttons: "→ Skip" (gray) and "✋ Offer Help" (purple gradient)</li>
+        <li><span class="icon"><i data-lucide="map-pin"></i></span>PostGIS DB-level radius filter - precise distance queries at scale</li>
+        <li><span class="icon"><i data-lucide="zap"></i></span>Loads 25 at a time, auto-fetches more as you go</li>
+        <li><span class="icon"><i data-lucide="move-horizontal"></i></span>Red/green tint overlay follows your swipe direction</li>
+        <li><span class="icon"><i data-lucide="camera"></i></span>Tap photos to zoom (pinch up to 4×)</li>
+        <li><span class="icon"><i data-lucide="ban"></i></span>Hides blocked and reported users automatically</li>
       </ul>
     </div>
     <div class="phone-wrapper">
@@ -678,11 +683,11 @@
       <h2>Browse on the <span class="gradient">Map</span></h2>
       <p>Toggle between card view and map view. See all nearby requests plotted with category emoji pins. Tap any pin to jump to that request - the card updates instantly at the bottom.</p>
       <ul class="feature-list">
-        <li><span class="icon">📌</span>Custom emoji pins colored by category</li>
-        <li><span class="icon">✨</span>Selected pin: highlighted with white border + shadow</li>
-        <li><span class="icon">✋</span>Request card shown below map - swipe, skip, or offer help</li>
-        <li><span class="icon">🔄</span>Cards ↔ Map toggle - synced to same index</li>
-        <li><span class="icon">📐</span>Camera centers on pin above the bottom card</li>
+        <li><span class="icon"><i data-lucide="map-pin"></i></span>Custom emoji pins colored by category</li>
+        <li><span class="icon"><i data-lucide="sparkles"></i></span>Selected pin: highlighted with white border + shadow</li>
+        <li><span class="icon"><i data-lucide="hand-helping"></i></span>Request card shown below map - swipe, skip, or offer help</li>
+        <li><span class="icon"><i data-lucide="refresh-cw"></i></span>Cards ↔ Map toggle - synced to same index</li>
+        <li><span class="icon"><i data-lucide="navigation"></i></span>Camera centers on pin above the bottom card</li>
       </ul>
     </div>
     <div class="phone-wrapper">
@@ -702,11 +707,11 @@
       <h2>Ask for <span class="gradient">Help</span> in Seconds</h2>
       <p>Create a request with a title, description, category, urgency level, and up to 3 photos. Phone verification is required before your first post - keeping the community trustworthy.</p>
       <ul class="feature-list">
-        <li><span class="icon">🔨</span>12-category grid with icon picker</li>
-        <li><span class="icon">📸</span>Photo upload from camera or gallery (up to 3)</li>
-        <li><span class="icon">🧹</span>Built-in content filter - EN + HE profanity blocked</li>
-        <li><span class="icon">📱</span>Phone verification required before posting</li>
-        <li><span class="icon">✅</span>Auto-redirects to My Requests after posting</li>
+        <li><span class="icon"><i data-lucide="hammer"></i></span>12-category grid with icon picker</li>
+        <li><span class="icon"><i data-lucide="camera"></i></span>Photo upload from camera or gallery (up to 3)</li>
+        <li><span class="icon"><i data-lucide="shield"></i></span>Built-in content filter - EN + HE profanity blocked</li>
+        <li><span class="icon"><i data-lucide="smartphone"></i></span>Phone verification required before posting</li>
+        <li><span class="icon"><i data-lucide="check-circle"></i></span>Auto-redirects to My Requests after posting</li>
       </ul>
     </div>
     <div class="phone-wrapper">
@@ -726,13 +731,13 @@
       <h2><span class="gradient">Real-Time</span> Messaging</h2>
       <p>Once matched, coordinate instantly with your neighbor. Messages deliver in milliseconds via Supabase Realtime WebSocket subscriptions - with no polling, no delays.</p>
       <ul class="feature-list">
-        <li><span class="icon">✍</span>Typing indicators - animated dots when partner is typing <span class="new-badge">New</span></li>
-        <li><span class="icon">✓</span>Read receipts - "Seen ✓" when your message was read <span class="new-badge">New</span></li>
-        <li><span class="icon">📨</span>Instant delivery via Realtime broadcast channel</li>
-        <li><span class="icon">🔴</span>Unread badge on tab - clears when you open Chat</li>
-        <li><span class="icon">📜</span>Pagination - load earlier messages on demand</li>
-        <li><span class="icon">✅</span>Mark Complete and rate your helper from chat</li>
-        <li><span class="icon">🚫</span>Report or block users directly from chat header</li>
+        <li><span class="icon"><i data-lucide="pencil"></i></span>Typing indicators - animated dots when partner is typing <span class="new-badge">New</span></li>
+        <li><span class="icon"><i data-lucide="check"></i></span>Read receipts - "Seen ✓" when your message was read <span class="new-badge">New</span></li>
+        <li><span class="icon"><i data-lucide="send"></i></span>Instant delivery via Realtime broadcast channel</li>
+        <li><span class="icon"><i data-lucide="bell-dot"></i></span>Unread badge on tab - clears when you open Chat</li>
+        <li><span class="icon"><i data-lucide="scroll"></i></span>Pagination - load earlier messages on demand</li>
+        <li><span class="icon"><i data-lucide="check-circle"></i></span>Mark Complete and rate your helper from chat</li>
+        <li><span class="icon"><i data-lucide="ban"></i></span>Report or block users directly from chat header</li>
       </ul>
     </div>
     <div class="phone-wrapper">
@@ -752,12 +757,12 @@
       <h2>Your <span class="gradient">Requests</span>, Organized</h2>
       <p>Review all active and past requests in one place. Accept or decline helpers with a tap, close completed requests, and rate your experience - all with haptic feedback.</p>
       <ul class="feature-list">
-        <li><span class="icon">📋</span>Active and History tabs</li>
-        <li><span class="icon">✅</span>Accept or decline helper offers</li>
-        <li><span class="icon">🎉</span>Celebration animation on accept + "Chat Now" CTA <span class="new-badge">New</span></li>
-        <li><span class="icon">📸</span>View request photos with pinch-to-zoom</li>
-        <li><span class="icon">🔄</span>Auto-refreshes when tab is focused</li>
-        <li><span class="icon">⭐</span>Star rating prompt on request completion</li>
+        <li><span class="icon"><i data-lucide="layout-list"></i></span>Active and History tabs</li>
+        <li><span class="icon"><i data-lucide="check-circle"></i></span>Accept or decline helper offers</li>
+        <li><span class="icon"><i data-lucide="party-popper"></i></span>Celebration animation on accept + "Chat Now" CTA <span class="new-badge">New</span></li>
+        <li><span class="icon"><i data-lucide="camera"></i></span>View request photos with pinch-to-zoom</li>
+        <li><span class="icon"><i data-lucide="refresh-cw"></i></span>Auto-refreshes when tab is focused</li>
+        <li><span class="icon"><i data-lucide="star"></i></span>Star rating prompt on request completion</li>
       </ul>
     </div>
     <div class="phone-wrapper">
@@ -777,11 +782,11 @@
       <h2>Your <span class="gradient">Community</span> Identity</h2>
       <p>Your public profile shows your stats, star rating, and reviews. Tap any user's name or avatar anywhere in the app to see their full review wall and community track record.</p>
       <ul class="feature-list">
-        <li><span class="icon">📊</span>Community Impact: Helped, Got Help, Rating, Posted</li>
-        <li><span class="icon">👤</span>Public profiles with review wall and share button</li>
-        <li><span class="icon">✅</span>Verification badge for Google/Apple sign-in</li>
-        <li><span class="icon">📡</span>Search radius (1–10 km) and availability toggle</li>
-        <li><span class="icon">🗑</span>Account deletion with full data wipe</li>
+        <li><span class="icon"><i data-lucide="bar-chart-2"></i></span>Community Impact: Helped, Got Help, Rating, Posted</li>
+        <li><span class="icon"><i data-lucide="user"></i></span>Public profiles with review wall and share button</li>
+        <li><span class="icon"><i data-lucide="check-circle"></i></span>Verification badge for Google/Apple sign-in</li>
+        <li><span class="icon"><i data-lucide="locate"></i></span>Search radius (1–10 km) and availability toggle</li>
+        <li><span class="icon"><i data-lucide="trash-2"></i></span>Account deletion with full data wipe</li>
       </ul>
       <div class="lang-badge">
         🇮🇱 Full Hebrew &amp; English · RTL Support
@@ -804,11 +809,11 @@
       <h2>Full <span class="gradient">RTL</span> Support</h2>
       <p>Every screen, label, and button is translated. The entire layout flips to right-to-left for Hebrew speakers. One tap in Profile to switch - the app remembers your preference.</p>
       <ul class="feature-list">
-        <li><span class="icon">🔄</span>One-tap language toggle on Profile screen</li>
-        <li><span class="icon">📐</span>Full RTL layout - arrows, inputs, modals all flip</li>
-        <li><span class="icon">📏</span>Hebrew uses km (ק״מ) instead of miles</li>
-        <li><span class="icon">🌐</span>210+ bilingual translation keys</li>
-        <li><span class="icon">🤝</span>Language preference synced to your profile</li>
+        <li><span class="icon"><i data-lucide="refresh-cw"></i></span>One-tap language toggle on Profile screen</li>
+        <li><span class="icon"><i data-lucide="navigation"></i></span>Full RTL layout - arrows, inputs, modals all flip</li>
+        <li><span class="icon"><i data-lucide="ruler"></i></span>Hebrew uses km (ק״מ) instead of miles</li>
+        <li><span class="icon"><i data-lucide="globe"></i></span>210+ bilingual translation keys</li>
+        <li><span class="icon"><i data-lucide="handshake"></i></span>Language preference synced to your profile</li>
       </ul>
     </div>
     <div class="phone-wrapper">
@@ -851,32 +856,32 @@
   <p style="font-size:17px;color:#64748b;max-width:520px;margin:0 auto;">Safety isn't a feature we added - it's baked into every layer of the app.</p>
   <div class="safety-grid">
     <div class="safety-card">
-      <div class="icon">📱</div>
+      <div class="icon"><i data-lucide="smartphone"></i></div>
       <h3>Phone Verification</h3>
       <p>Required before helping or posting. Verified via Twilio SMS OTP - rate-limited to 3 attempts per 10 minutes.</p>
     </div>
     <div class="safety-card">
-      <div class="icon">🚫</div>
+      <div class="icon"><i data-lucide="ban"></i></div>
       <h3>Report &amp; Block</h3>
       <p>Report any user with 5 reason options. Auto-block on report. Bidirectional blocking - blocked users disappear from both sides.</p>
     </div>
     <div class="safety-card">
-      <div class="icon">🔐</div>
+      <div class="icon"><i data-lucide="shield"></i></div>
       <h3>Row-Level Security</h3>
       <p>All 9 database tables have RLS policies. You can only see and modify data you're authorized to access.</p>
     </div>
     <div class="safety-card">
-      <div class="icon">🧹</div>
+      <div class="icon"><i data-lucide="filter"></i></div>
       <h3>Content Filter</h3>
       <p>EN + HE profanity blocklist applied to all posts and messages before they reach the database.</p>
     </div>
     <div class="safety-card">
-      <div class="icon">📜</div>
+      <div class="icon"><i data-lucide="file-text"></i></div>
       <h3>Terms Acceptance</h3>
       <p>Every user must accept community guidelines on first sign-in - covering zero tolerance for harassment and fraud.</p>
     </div>
     <div class="safety-card">
-      <div class="icon">🗑</div>
+      <div class="icon"><i data-lucide="trash-2"></i></div>
       <h3>Account Deletion</h3>
       <p>Full data wipe on request - profiles, messages, matches, ratings, all deleted via server-side RPC with one tap.</p>
     </div>
@@ -895,57 +900,57 @@
       <p>SDK 54, TypeScript, EAS Build. Ships to iOS and Android from one codebase.</p>
     </div>
     <div class="tech-card">
-      <div class="icon">⚡</div>
+      <div class="icon"><i data-lucide="zap"></i></div>
       <h3>Supabase</h3>
       <p>PostgreSQL with RLS on all tables, Realtime WebSockets, Storage, and 5 Edge Functions (Deno).</p>
     </div>
     <div class="tech-card">
-      <div class="icon">🔑</div>
+      <div class="icon"><i data-lucide="key"></i></div>
       <h3>Authentication</h3>
       <p>Google OAuth (primary), Apple Sign-In, email hidden fallback. Auto-profile creation on social sign-in.</p>
     </div>
     <div class="tech-card">
-      <div class="icon">📲</div>
+      <div class="icon"><i data-lucide="message-square"></i></div>
       <h3>Twilio Verify</h3>
       <p>SMS OTP phone verification via Edge Function. Rate-limited. Bypasses flaky Supabase phone auth.</p>
     </div>
     <div class="tech-card">
-      <div class="icon">🔔</div>
+      <div class="icon"><i data-lucide="bell"></i></div>
       <h3>Push Notifications</h3>
       <p>Expo Push API with bilingual (HE/EN) alerts for new offers, messages, accepted matches, and ratings.</p>
     </div>
     <div class="tech-card">
-      <div class="icon">🗺</div>
+      <div class="icon"><i data-lucide="map"></i></div>
       <h3>Maps + Geolocation</h3>
       <p>react-native-maps with custom emoji pins. Haversine distance. expo-location auto-updates on sign-in.</p>
     </div>
     <div class="tech-card">
-      <div class="icon">♿</div>
+      <div class="icon"><i data-lucide="accessibility"></i></div>
       <h3>Accessibility</h3>
       <p>VoiceOver labels, Reduce Motion support, native chevron back button, swipe-to-dismiss modals.</p>
     </div>
     <div class="tech-card">
-      <div class="icon">🌐</div>
+      <div class="icon"><i data-lucide="globe"></i></div>
       <h3>i18n + RTL</h3>
       <p>210+ keys, Hebrew/English toggle, full right-to-left layout flip, km vs miles auto-switch.</p>
     </div>
     <div class="tech-card">
-      <div class="icon">🌙</div>
+      <div class="icon"><i data-lucide="moon"></i></div>
       <h3>Dark Mode</h3>
       <p>Full system dark mode - every screen, modal, and component uses a themed color system with smooth transitions.</p>
     </div>
     <div class="tech-card">
-      <div class="icon">✨</div>
+      <div class="icon"><i data-lucide="sparkles"></i></div>
       <h3>Animations</h3>
       <p>Haptic feedback, spring animations, skeleton loaders, swipe tint overlay, celebration confetti - with Reduce Motion support.</p>
     </div>
     <div class="tech-card">
-      <div class="icon">📈</div>
+      <div class="icon"><i data-lucide="trending-up"></i></div>
       <h3>PostHog Analytics</h3>
       <p>EU-hosted. Tracks the full funnel: sign_up → request_posted → swipe_right → match_created → help_completed.</p>
     </div>
     <div class="tech-card">
-      <div class="icon">🐛</div>
+      <div class="icon"><i data-lucide="bug"></i></div>
       <h3>Sentry Crash Reporting</h3>
       <p>EU data center. Catches unhandled exceptions, reports JS errors with full stack traces, and error boundary UI fallback.</p>
     </div>
@@ -988,6 +993,9 @@
   }, { threshold: 0.12 });
 
   document.querySelectorAll('.section').forEach(el => observer.observe(el));
+
+  // Render Lucide icons
+  lucide.createIcons();
 
   // Space bar auto-play tour
   const tourSections = ['flow', 's1', 's-map', 's2', 's3', 's4', 's5', 's6', 'safety', 'tech'];
